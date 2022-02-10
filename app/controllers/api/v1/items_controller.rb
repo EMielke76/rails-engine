@@ -20,7 +20,7 @@ class Api::V1::ItemsController < ApplicationController
   def create
     item = Item.create(item_params)
     if item.save
-      render json: ItemSerializer.new(item), status: :no_content
+      render json: ItemSerializer.new(item), status: :created
     else
       render json: { status: 'ERROR', message: 'Unable to save item. Please try again', data: item.errors}, status: :unprocessable_entity
     end

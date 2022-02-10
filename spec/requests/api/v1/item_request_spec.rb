@@ -98,6 +98,7 @@ RSpec.describe 'the items endpoints' do
         post api_v1_items_path, headers: headers, params: JSON.generate(item: item_params)
 
         new_item = JSON.parse(response.body, symbolize_names: true)
+        
         expect(response).to have_http_status(201)
 
         expect(merchant_1.items.count).to eq(1)
@@ -187,7 +188,7 @@ RSpec.describe 'the items endpoints' do
 
         result = Item.find_by(id: item.id)
 
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(200)
         expect(result.name).to_not eq(previous_data)
         expect(result.name).to eq("This thing")
       end
