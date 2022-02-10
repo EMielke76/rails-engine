@@ -41,10 +41,10 @@ RSpec.describe 'the merchants endpoints' do
         bob = create(:merchant)
         items = create_list(:item, 5, merchant: bob)
 
-        get "/api/v1/merchants/12/items"
+        get api_v1_merchant_items_path("banana")
 
         merchant_items = JSON.parse(response.body, symbolize_names: true)
-
+        require "pry"; binding.pry
         expect(response).to have_http_status(404)
       end
     end
