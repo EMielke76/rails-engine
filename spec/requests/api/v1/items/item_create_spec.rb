@@ -77,19 +77,8 @@ RSpec.describe 'the create item endpoint' do
 
       expect(response).to have_http_status(422)
 
-      expect(error).to have_key(:status)
-      expect(error[:status]).to eq("ERROR")
-
       expect(error).to have_key(:message)
-      expect(error[:message]).to eq("Unable to save item. Please try again")
-
-      expect(error).to have_key(:data)
-      expect(error[:data]).to be_a(Hash)
-
-      error_data = error[:data]
-
-      expect(error_data).to have_key(:unit_price)
-      expect(error_data[:unit_price].first).to eq("is not a number")
+      expect(error[:message]).to eq("Validation failed: Unit price is not a number")
     end
   end
 end
