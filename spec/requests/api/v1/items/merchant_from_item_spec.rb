@@ -36,9 +36,9 @@ RSpec.describe 'the merchant from item endpoint' do
   context 'sad path' do
     it 'returns a 404 if given invalid data' do
       bob = create(:merchant)
-      items = create(:item, merchant: bob)
-
-      get "/api/v1/items/12/merchant"
+      item = create(:item, merchant: bob)
+      
+      get "/api/v1/items/0/merchant"
 
       merchant_items = JSON.parse(response.body, symbolize_names: true)
 
