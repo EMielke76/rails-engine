@@ -98,7 +98,7 @@ RSpec.describe 'the items endpoints' do
         post api_v1_items_path, headers: headers, params: JSON.generate(item: item_params)
 
         new_item = JSON.parse(response.body, symbolize_names: true)
-        
+
         expect(response).to have_http_status(201)
 
         expect(merchant_1.items.count).to eq(1)
@@ -227,7 +227,36 @@ RSpec.describe 'the items endpoints' do
       end
     end
 
-    it 'returns merchant data for a given item' do
+    context 'merhcant from item endpoint' do
+      it 'returns merchant data for a given item' do
+        merchant = create(:merchant, name: "Bob")
+        item = create(:item)
+
+        get api_v1_item_merchant_index_path(item.id)
+
+        merchant = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(200)
+
+        expect(merchant).to have_key(:data)
+        expect(merchant[:data]).to be_a(Hash)
+
+        merchant_data = merchant[:data]
+
+        expect(merchant_data).to have_key(:id)
+        expect(merchant_data[:id]).to be_a(String)
+
+        expect(merchant_data).to have_key(:type)
+        expect(merchant_data[:type]).to eq('merchant')
+
+        expect(merchant_data).to have_key(:attributes)
+        expect(merchant_data[:attributes]).to be_a(Hash)
+
+        merchant_attributes = merchant_data[:attributes]
+
+        expect(merchant_attributes).to have_key(:name)
+        expect(merchant_attributes[:name]).to be_a(String)
+      end
     end
   end
 end
