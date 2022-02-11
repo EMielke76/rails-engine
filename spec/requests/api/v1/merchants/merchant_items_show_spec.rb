@@ -44,7 +44,7 @@ RSpec.describe 'the merchants endpoints' do
         get api_v1_merchant_items_path("banana")
 
         merchant_items = JSON.parse(response.body, symbolize_names: true)
-        require "pry"; binding.pry
+        
         expect(response).to have_http_status(404)
       end
     end
