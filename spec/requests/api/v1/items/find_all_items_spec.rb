@@ -154,7 +154,7 @@ RSpec.describe 'Find All Items endpoint' do
         get '/api/v1/items/find_all?max_price=4.99'
 
         results = JSON.parse(response.body, symbolize_names: true)
-        
+
         expect(response).to have_http_status(200)
 
         expect(results).to have_key(:data)
@@ -237,6 +237,134 @@ RSpec.describe 'Find All Items endpoint' do
       get '/api/v1/items/find_all'
 
       results = JSON.parse(response.body, symbolize_names: true )
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+    end
+
+    it 'errors when name search is incomplete' do
+      get '/api/v1/items/find_all?name='
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+
+      get '/api/v1/items/find_all?name'
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+    end
+
+    it 'errors when name min_price is incomplete' do
+      get '/api/v1/items/find_all?min_price='
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+
+      get '/api/v1/items/find_all?min_price'
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+    end
+    
+    it 'errors when name min_price is incomplete' do
+      get '/api/v1/items/find_all?max_price='
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+
+      get '/api/v1/items/find_all?max_price'
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+    end
+
+    it 'errors when name min and max_price is incomplete' do
+      get '/api/v1/items/find_all?min_price=&max_price='
+
+      results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+
+      expect(results).to have_key(:status)
+      expect(results[:status]).to eq("BAD REQUEST")
+
+      expect(results).to have_key(:message)
+      expect(results[:message]).to eq('search parameters cannot be empty')
+
+      expect(results).to have_key(:data)
+      expect(results[:data]).to eq({})
+
+      get '/api/v1/items/find_all?min_price&max_price'
+
+      results = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(400)
 
