@@ -10,7 +10,7 @@
 
 ## About
 - Project requirements can be found [Here](https://backend.turing.edu/module3/projects/rails_engine_lite/)
-- Rails Engine is a project for developing and exposing various endpoints of an API.
+- Rails Engine is a project for the Turing School of Software and Design gearned around developing and exposing various endpoints of an API. Later paired with it's sister project ![Rails Engine FE](https://github.com/EMielke76/rails_engine_fe).
 
 ## Database Schema
 - See image below for project database schema:
